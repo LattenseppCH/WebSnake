@@ -6,7 +6,7 @@
 
 ## 🎮 Live Demo
 
-> Play locally: [http://localhost:8080](http://localhost:8080)
+> Play locally: [http://localhost:8080](http://localhost:8080) (WORK IN PROGRESS)
 
 ---
 
