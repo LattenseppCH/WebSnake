@@ -1,6 +1,6 @@
-# 🐍 SnakeStack
+# 🐍 WebSnake
 
-**SnakeStack** is a lightweight, browser-based Snake game made with vanilla HTML, CSS, and JavaScript — containerized using Docker for quick and easy deployment anywhere.
+**WebSnake** is a lightweight, browser-based Snake game made with vanilla HTML, CSS, and JavaScript — containerized using Docker for quick and easy deployment anywhere.
 
 ---
 
@@ -27,4 +27,4 @@
 
 ```bash
 git clone https://github.com/LattenseppCH/WebSnake.git
-cd snakestack
+cd WebSnake
