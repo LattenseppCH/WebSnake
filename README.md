@@ -6,7 +6,7 @@
 
 ## 🎮 Live Demo
 
-> Play locally: [http://localhost:8080](http://localhost:8080) (WORK IN PROGRESS)
+> Play locally: [http://localhost:8080](http://localhost:8080)
 
 ---
 
@@ -17,7 +17,7 @@
 - Dynamic speed increase in Hard mode
 - Clean retro-style design
 - Pure JS, no frameworks
-- Fully dockerized (with NGINX)
+- Fully dockerized (with Flask)
 
 ---
 
