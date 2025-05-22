@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake</title>
+    <link rel="shortcut icon" href="snake.png" sizes="32x32" type="image/png">
+    <style>
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000;
+        }
+        canvas {
+            border: 1px solid #ffffff;
+        }
+        .scoreboard {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .button-container {
+            margin-bottom: 10px;
+        }
+        .button {
+            font-size: 18px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .input-container {
+            margin-top: 10px;
+        }
+        .input-container label {
+            color: white;
+            font-size: 18px;
+            margin-right: 10px;
+        }
+        .input-container input {
+            font-size: 18px;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="scoreboard">Score: <span id="score">0</span></div>
+    
+
+    <div class="button-container">
+        <button class="button" id="difficultyButton">Einfach</button>
+    </div>
+    
+
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+    <script>
+
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.getElementById('score');
+        const difficultyButton = document.getElementById('difficultyButton');
+
+        const gridSize = 20;
+        let snake = [{ x: 200, y: 200 }];
+        let direction = { x: 0, y: 0 };
+        let apple = { x: 300, y: 300 };
+        let score = 0;
+        let speed = 100;
+        let isHard = false;
+        let gameInterval;
+
+
+        document.addEventListener('keydown', function(event) {
+            switch(event.key) {
+                case 'ArrowUp':
+                    if (direction.y === 0) direction = { x: 0, y: -gridSize };
+                    break;
+                case 'ArrowDown':
+                    if (direction.y === 0) direction = { x: 0, y: gridSize };
+                    break;
+                case 'ArrowLeft':
+                    if (direction.x === 0) direction = { x: -gridSize, y: 0 };
+                    break;
+                case 'ArrowRight':
+                    if (direction.x === 0) direction = { x: gridSize, y: 0 };
+                    break;
+            }
+        });
+
+
+
+
+        difficultyButton.addEventListener('click', function() {
+            isHard = !isHard;
+            difficultyButton.textContent = isHard ? 'Hart' : 'Einfach';
+            resetGame();
+        });
+
+
+        function gameLoop() {
+            const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
+            snake.unshift(head);
+
+
+            if (head.x === apple.x && head.y === apple.y) {
+                apple = { 
+                    x: Math.floor(Math.random() * canvas.width / gridSize) * gridSize,
+                    y: Math.floor(Math.random() * canvas.height / gridSize) * gridSize
+                };
+                score++;
+                scoreElement.textContent = score;
+
+                if (isHard) {
+                    speed = speed / 1.1;
+                    clearInterval(gameInterval);
+                    gameInterval = setInterval(gameLoop, speed);
+                }
+            } else {
+                snake.pop()
+            }
+
+
+
+
+
+
+            if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height || collision()) {
+                endGame();
+            }
+
+            ctx.fillStyle = 'black';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = 'white';
+            for (let i = 0; i < snake.length; i++) {
+                ctx.fillRect(snake[i].x, snake[i].y, gridSize, gridSize);
+            }
+
+            ctx.fillStyle = 'red';
+            ctx.fillRect(apple.x, apple.y, gridSize, gridSize);
+        }
+
+
+
+        function collision() {
+            for (let i = 1; i < snake.length; i++) {
+                if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) {
+                    return true; 
+                }
+            }
+            return false;
+        }
+
+
+        function endGame() {
+            clearInterval(gameInterval);
+            alert('Dein Ergebniss war ' + score);
+            resetGame();
+        }
+
+
+
+        function resetGame() {
+            clearInterval(gameInterval);
+            snake = [{ x: 200, y: 200 }];
+            direction = { x: 0, y: 0 };
+            apple = { x: 300, y: 300 };
+            score = 0;
+            scoreElement.textContent = score;
+            speed = 100;
+            gameInterval = setInterval(gameLoop, speed);
+        }
+        resetGame();
+    </script>
+</body>
+</html>
