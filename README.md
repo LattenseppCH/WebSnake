@@ -31,5 +31,5 @@ git clone https://github.com/LattenseppCH/WebSnake.git
 cd WebSnake
 cd WebSnakeFlask
 
-docker build -t WebSnake .
-docker run -d -p 8080:8080 WebSnake
+docker build -t websnake .
+docker run -d -p 8080:8080 websnake
