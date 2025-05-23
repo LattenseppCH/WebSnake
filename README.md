@@ -17,7 +17,7 @@
 
 ## Installation
 
-Install WebSnake
+Install WebSnake using this repository
 
 ```bash
   git clone https://github.com/LattenseppCH/WebSnake.git
