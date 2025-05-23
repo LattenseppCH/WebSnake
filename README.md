@@ -30,12 +30,6 @@ Install WebSnake using this repository
 
 ## Tech Stack
 
-
-**Container:** Flask (Python), HTML, CSS, JS
-
-
-## 🧱 Tech Stack
-
 | Component         | Technology                                     |
 |------------------|------------------------------------------------|
 | Containerization | Docker, Docker Compose                         |
