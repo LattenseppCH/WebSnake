@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  reverse_proxy:
+    image: nginx:latest
+    container_name: reverse_proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - auth_server
+      - game_server
+
+  auth_server:
+    build: ./auth
+    container_name: flask_auth
+    restart: unless-stopped
+
+  game_server:
+    build: ./game
+    container_name: flask_game
+    restart: unless-stopped
