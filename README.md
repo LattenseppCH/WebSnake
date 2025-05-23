@@ -52,7 +52,7 @@ Install WebSnake using this repository
 
 ## 🔎 Sources
 
-- [Emoji] (https://emojipedia.org/)
-- [Logo] (https://chatgpt.com)
-- [Docker Compose] (https://docs.docker.com/compose/)
-- [README] (https://readme.so)
+- [Emoji](https://emojipedia.org/)
+- [Logo](https://chatgpt.com)
+- [Docker Compose](https://docs.docker.com/compose/)
+- [README](https://readme.so)
