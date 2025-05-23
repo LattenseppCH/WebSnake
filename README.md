@@ -56,3 +56,4 @@ Install WebSnake using this repository
 - [Logo](https://chatgpt.com)
 - [Docker Compose](https://docs.docker.com/compose/)
 - [README](https://readme.so)
+- [NGINX Config](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/)
