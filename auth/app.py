@@ -1,4 +1,5 @@
-from flask import Flask, request, redirect, render_template, make_response
+from flask import Flask, request, redirect, render_template, make_response, jsonify
+
 from datetime import datetime
 from models import db, User
 
@@ -52,6 +53,20 @@ def check():
     if User.query.filter_by(auth_token=token).first():
         return jsonify({'status': 'ok'}), 200
     return jsonify({'status': 'unauthorized'}), 401
+
+
+@app.route('/api/resolve-token')
+def resolve_token():
+    token = request.args.get('token')
+    if not token:
+        return jsonify({'error': 'Missing token'}), 400
+
+    user = User.query.filter_by(auth_token=token).first()
+    if not user:
+        return jsonify({'error': 'Invalid token'}), 401
+
+    return jsonify({'username': user.username})
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
