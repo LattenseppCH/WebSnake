@@ -103,4 +103,4 @@ WebSnake/
 - [FlaskAuth]()
 - [Dockerfile](https://docs.docker.com/build/concepts/dockerfile/)
 - [Debug Help](https://chatgpt.com)
-- Special thanks to **Gianluca** for debug help
+- Special thanks to **Gianluca** for tips & debug help
