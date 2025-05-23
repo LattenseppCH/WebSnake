@@ -8,7 +8,7 @@ def index():
 
 @app.route('/favicon.ico')
 def favicon():
-    return send_from_directory(app.static_folder, 'favicon.ico', mimetype='image/x-icon')
+    return send_from_directory(app.static_folder, 'icons/favicon.ico', mimetype='image/x-icon')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
