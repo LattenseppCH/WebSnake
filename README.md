@@ -2,8 +2,11 @@
 ![Logo](https://github.com/LattenseppCH/WebSnake/blob/main/game/static/icons/websnake_full.png)
 
 
+# 🐍 WebSnake
 
-**WebSnake** is a lightweight, browser-based Snake game made with vanilla HTML, CSS, and JavaScript — containerized using Docker for quick and easy deployment anywhere.
+**WebSnake** is a lightweight, browser-based Snake game built with vanilla HTML, CSS, and JavaScript.  
+It’s fully containerized using Docker Compose, featuring separate services for authentication, gameplay, and reverse proxy – allowing quick and secure deployment anywhere.
+
 
 
 ## Features
