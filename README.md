@@ -57,3 +57,8 @@ Install WebSnake using this repository
 - [Docker Compose](https://docs.docker.com/compose/)
 - [README](https://readme.so)
 - [NGINX Config](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/)
+- [Base Snake Game](https://snake.lattensepp.ch)
+- [SQLite3]()
+- [Flask]()
+- [FlaskAuth]()
+- [Dockerfile](https://docs.docker.com/build/concepts/dockerfile/)
