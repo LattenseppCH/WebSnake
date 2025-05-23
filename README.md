@@ -1,5 +1,5 @@
 
-![Logo](https://github.com/LattenseppCH/WebSnake/blob/main/WebSnakeFlask/static/websnake_full.png)
+![Logo](https://github.com/LattenseppCH/WebSnake/blob/main/game/static/icons/websnake_full.png)
 
 
 
