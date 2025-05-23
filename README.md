@@ -32,6 +32,40 @@ Install WebSnake using this repository
   docker compose up --build
 ```
     
+## 📁 Project Structure
+
+WEBSNAKE
+│   docker-compose.yml
+│   README.md
+│
+├───auth
+│   │   app.py
+│   │   db.sqlite3
+│   │   Dockerfile
+│   │   models.py
+│   │   requirements.txt
+│   │
+│   └───templates
+│           login.html
+│           register.html
+│
+├───game
+│   │   app.py
+│   │   Dockerfile
+│   │   requirements.txt
+│   │
+│   └───static
+│       │   index.html
+│       │
+│       └───icons
+│               favicon-16x16.png
+│               favicon-32x32.png
+│               favicon.ico
+│               websnake_cropped.png
+│               websnake_full.png
+│
+└───nginx
+        nginx.conf
 
 ## 🤖 Tech Stack
 
