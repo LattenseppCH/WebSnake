@@ -35,7 +35,7 @@ Install WebSnake using this repository
 ## 📁 Project Structure
 
 
-
+```
 WebSnake/
 ├── docker-compose.yml # Docker Compose setup for all services
 ├── README.md # Project overview and usage
@@ -65,7 +65,7 @@ WebSnake/
 
 └── nginx/ # NGINX reverse proxy
 └── nginx.conf # Routing & auth check config
-
+```
 
 
 ## 🤖 Tech Stack
