@@ -8,12 +8,14 @@
 
 ## Features
 
-- Classic Snake gameplay
-- "Easy" and "Hard" mode toggle
+- Classic Snake gameplay built with pure JavaScript and HTML5 Canvas
+- Difficulty toggle: "Easy" and "Hard" mode
 - Dynamic speed increase in Hard mode
-- Clean retro-style design
-- Pure JS, no frameworks
-- Fully dockerized (with Flask)
+- Clean, retro-inspired UI
+- Flask-based Auth and Game servers
+- Fully dockerized using Docker Compose
+- NGINX reverse proxy handles routing and access control
+- Lightweight and portable (no external database required)
 
 ## Installation
 
