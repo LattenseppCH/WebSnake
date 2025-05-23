@@ -23,25 +23,26 @@ Install WebSnake using this repository
   git clone https://github.com/LattenseppCH/WebSnake.git
 
   cd WebSnake
-  cd WebSnakeFlask
 
-  docker build -t websnake .
+  docker compose up --build
 ```
     
-## Run Locally
-
-First, run the installation as described above. Afterwards, use the following command to start the container.
-
-
-```bash
-  docker run -d -p 8080:8080 websnake
-```
-
 
 ## Tech Stack
 
 
 **Container:** Flask (Python), HTML, CSS, JS
+
+
+## 🧱 Tech Stack
+
+| Component         | Technology                                     |
+|------------------|------------------------------------------------|
+| Containerization | Docker, Docker Compose                         |
+| Reverse Proxy     | NGINX (handles routing & auth cookie checks)   |
+| Authentication    | Flask (Python), SQLite (token-based login)     |
+| Game Server       | Flask (Python), HTML5, CSS3, JavaScript (Canvas) |
+| Database          | SQLite (file-based, embedded in container)     |
 
 
 ## Authors
