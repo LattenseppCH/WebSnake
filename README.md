@@ -36,35 +36,40 @@ Install WebSnake using this repository
 
 
 ```
+
 WebSnake/
-├── docker-compose.yml # Docker Compose setup for all services
-├── README.md # Project overview and usage
+│   docker-compose.yml
+│   README.md
+│
+├───auth
+│   │   app.py
+│   │   db.sqlite3
+│   │   Dockerfile
+│   │   models.py
+│   │   requirements.txt
+│   │
+│   └───templates
+│           login.html
+│           register.html
+│
+├───game
+│   │   app.py
+│   │   Dockerfile
+│   │   requirements.txt
+│   │
+│   └───static
+│       │   index.html
+│       │
+│       └───icons
+│               favicon-16x16.png
+│               favicon-32x32.png
+│               favicon.ico
+│               websnake_cropped.png
+│               websnake_full.png
+│
+└───nginx
+        nginx.conf
 
-├── auth/ # Authentication service (Flask + SQLite)
-│ ├── app.py # Main Flask application
-│ ├── db.sqlite3 # Local SQLite database
-│ ├── Dockerfile # Docker build instructions
-│ ├── models.py # SQLAlchemy User model
-│ ├── requirements.txt # Python dependencies
-│ └── templates/ # HTML templates for login/register
-│ ├── login.html
-│ └── register.html
-
-├── game/ # Game service (Flask Snake frontend)
-│ ├── app.py # Main Flask app serving the game
-│ ├── Dockerfile # Docker build instructions
-│ ├── requirements.txt # Python dependencies
-│ └── static/ # Static game assets
-│ ├── index.html # Game frontend
-│ └── icons/ # Icons and favicons
-│ ├── favicon.ico
-│ ├── favicon-16x16.png
-│ ├── favicon-32x32.png
-│ ├── websnake_cropped.png
-│ └── websnake_full.png
-
-└── nginx/ # NGINX reverse proxy
-└── nginx.conf # Routing & auth check config
 ```
 
 
