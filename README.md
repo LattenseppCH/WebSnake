@@ -9,7 +9,7 @@ It’s fully containerized using Docker Compose, featuring separate services for
 
 
 
-## Features
+## ✨ Features
 
 - Classic Snake gameplay built with pure JavaScript and HTML5 Canvas
 - Difficulty toggle: "Easy" and "Hard" mode
@@ -20,7 +20,7 @@ It’s fully containerized using Docker Compose, featuring separate services for
 - NGINX reverse proxy handles routing and access control
 - Lightweight and portable (no external database required)
 
-## Installation
+## 💻 Installation
 
 Install WebSnake using this repository
 
@@ -33,7 +33,7 @@ Install WebSnake using this repository
 ```
     
 
-## Tech Stack
+## 🤖 Tech Stack
 
 | Component         | Technology                                     |
 |------------------|------------------------------------------------|
@@ -44,7 +44,7 @@ Install WebSnake using this repository
 | Database          | SQLite (file-based, embedded in container)     |
 
 
-## Authors
+## 📖 Authors
 
 - [@Rahim Pacolli](https://github.com/LattenseppCH)
 - [@Julian Eberle](https://github.com/Julian9496)
