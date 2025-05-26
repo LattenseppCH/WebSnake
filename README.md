@@ -101,6 +101,7 @@ WebSnake/
 - [SQLite3]()
 - [Flask]()
 - [FlaskAuth]()
+- [AuthPage (Login, Register, Error..)]()
 - [Dockerfile](https://docs.docker.com/build/concepts/dockerfile/)
 - [Debug Help](https://chatgpt.com)
 - Special thanks to **Gianluca** for debug help
