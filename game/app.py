@@ -22,21 +22,22 @@ def submit_highscore(username, score_easy, score_hard):
     except requests.RequestException as e:
         print("Error submitting high scores:", e)
 
-
 @app.route('/')
 def index():
     token = request.cookies.get('auth')
-    username = 'Guest'
 
     if token:
         try:
             res = requests.get('http://flask_auth:5000/api/resolve-token', params={'token': token}, timeout=2)
             if res.ok:
                 username = res.json().get('username', 'Guest')
+                return render_template('index.html', username=username)
+            else:
+                return redirect('/')
         except requests.RequestException:
-            pass
-
-    return render_template('index.html', username=username)
+            return redirect('/lol')
+    else:
+        return redirect('/')
 
 @app.route('/icons/<path:filename>')
 def serve_icons(filename):
