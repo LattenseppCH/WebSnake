@@ -4,6 +4,25 @@ import requests
 
 app = Flask(__name__, static_folder='static')
 
+
+def submit_highscore(username, score_easy, score_hard):
+    url = 'http://flask_auth:5000/api/highscore'
+    data = {
+        'username': username,
+        'score_easy': score_easy,
+        'score_hard': score_hard
+    }
+    
+    try:
+        response = requests.post(url, json=data)
+        if response.status_code == 200:
+            print("High scores submitted successfully!")
+        else:
+            print("Failed to submit high scores:", response.json())
+    except requests.RequestException as e:
+        print("Error submitting high scores:", e)
+
+
 @app.route('/')
 def index():
     token = request.cookies.get('auth')

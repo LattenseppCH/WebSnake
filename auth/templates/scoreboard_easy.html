@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WebSnake - Easy Rangliste</title>
+  <style>
+    :root {
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      --color-bg: #1f2937;
+      --color-gray-600: #4b5563;
+      --color-gray-900: #111827;
+      --color-white: #f9fafb;
+      --color-primary: #2563eb;
+      --color-primary-hover: #1e40af;
+      --color-red: #ff4d4d;
+      --border-radius: 12px;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      background-color: var(--color-bg);
+      color: var(--color-white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      background-color: var(--color-gray-900);
+      border-radius: var(--border-radius);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+      padding: 2rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .user-info {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: var(--color-gray-600);
+      border-radius: 30px;
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background-color: var(--color-gray-900);
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 10px;
+    }
+
+    .dropdown button {
+      background-color: var(--color-primary);
+      border: none;
+      color: white;
+      padding: 10px;
+      border-radius: var(--border-radius);
+      width: 100%;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .dropdown button:hover {
+      background-color: var(--color-primary-hover);
+    }
+
+    .dropdown button:last-child {
+      background-color: var(--color-red);
+    }
+
+    .dropdown button:last-child:hover {
+      background-color: darkred;
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+    }
+
+    .scrollbox {
+      width: 100%;
+      max-height: 400px;
+      overflow-y: auto;
+      border: 1px solid var(--color-gray-600);
+      border-radius: var(--border-radius);
+      padding: 1rem;
+      background-color: var(--color-bg);
+    }
+
+    .entry {
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--color-gray-600);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .entry:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="user-info" onclick="toggleDropdown(event)">
+      👤 {{ username }}
+    </div>
+    <div class="dropdown" id="userDropdown">
+      <button onclick="window.location.href='/game'">Game</button>
+      <button onclick="window.location.href='/auth/logoff'">Logoff</button>
+    </div>
+
+    <h1>Easy Leaderboard</h1>
+    <div class="scrollbox">
+      {% for user in users %}
+      <div class="entry">
+        <span>{{ user.username }}</span>
+        <span>{{ user.hs_easy }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="leaderboard-buttons" style="margin-top: 2rem; display: flex; gap: 1rem;">
+      <a href="/scoreboard_hard" style="background-color: var(--color-primary); color: var(--color-white); text-decoration: none; padding: 0.75rem 1rem; border-radius: var(--border-radius); font-weight: 600; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='var(--color-primary-hover)'" onmouseout="this.style.backgroundColor='var(--color-primary)'">Scoreboard: Hard</a>
+      <a href="/scoreboard" style="background-color: var(--color-gray-600); color: var(--color-white); text-decoration: none; padding: 0.75rem 1rem; border-radius: var(--border-radius); font-weight: 600;">Back</a>
+    </div>
+  </div>
+
+
+
+
+  <script>
+    function toggleDropdown(event) {
+      event.stopPropagation();
+      const dropdown = document.getElementById("userDropdown");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    document.addEventListener("click", function () {
+      const dropdown = document.getElementById("userDropdown");
+      if (dropdown && dropdown.style.display === "block") {
+        dropdown.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>

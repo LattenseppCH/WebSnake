@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WebSnake - Mein Score</title>
+  <style>
+    :root {
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      --color-bg: #1f2937;
+      --color-gray-600: #4b5563;
+      --color-gray-900: #111827;
+      --color-white: #f9fafb;
+      --color-primary: #2563eb;
+      --color-primary-hover: #1e40af;
+      --color-red: #ff4d4d;
+      --border-radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      background-color: var(--color-bg);
+      color: var(--color-white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      padding: 2rem;
+      background-color: var(--color-gray-900);
+      border-radius: var(--border-radius);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+      position: relative;
+    }
+
+    .user-info {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: var(--color-gray-600);
+      border-radius: 30px;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background-color: var(--color-gray-900);
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 10px;
+    }
+
+    .dropdown button {
+      background-color: var(--color-primary);
+      border: none;
+      color: white;
+      padding: 10px;
+      border-radius: var(--border-radius);
+      width: 100%;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .dropdown button:hover {
+      background-color: var(--color-primary-hover);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .stats {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      font-size: 1.1rem;
+    }
+
+    .stats div {
+      background-color: var(--color-bg);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      border: 1px solid var(--color-gray-600);
+    }
+
+    .leaderboard-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+
+    .leaderboard-buttons a {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      text-decoration: none;
+      padding: 0.75rem 1rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
+
+    .leaderboard-buttons a:hover {
+      background-color: var(--color-primary-hover);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="user-info" onclick="toggleDropdown(event)">
+      👤 {{ user.username }}
+    </div>
+    <div class="dropdown" id="userDropdown">
+    <button onmouseover="this.style.backgroundColor='var(--color-primary-hover)'" onmouseout="this.style.backgroundColor='var(--color-primary)'" onclick="window.location.href='/game'">Game</button>
+    <button onmouseover="this.style.backgroundColor='darkred'" onmouseout="this.style.backgroundColor='var(--color-red)'" style="background-color: var(--color-red);" onclick="window.location.href='/auth/logoff'">Logoff</button>
+    </div>
+
+
+    <h1>Mein Scoreboard</h1>
+    <div class="stats">
+      <div><strong>Username:</strong> {{ user.username }}</div>
+      <div><strong>Highscore (Easy):</strong> {{ user.hs_easy }}</div>
+      <div><strong>Highscore (Hard):</strong> {{ user.hs_hard }}</div>
+    </div>
+
+    <div class="leaderboard-buttons">
+      <a href="/scoreboard_easy">Scoreboard: Easy</a>
+      <a href="/scoreboard_hard">Scoreboard: Hard</a>
+    </div>
+  </div>
+
+  <script>
+    function toggleDropdown(event) {
+      event.stopPropagation();
+      const dropdown = document.getElementById("userDropdown");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    document.addEventListener("click", function () {
+      const dropdown = document.getElementById("userDropdown");
+      if (dropdown && dropdown.style.display === "block") {
+        dropdown.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>

@@ -215,7 +215,41 @@
         function endGame() {
             clearInterval(gameInterval);
             alert('Dein Ergebniss war ' + score);
+            
+            const username = '{{ username }}';
+
+            submitHighscore(username, score, isHard);
+
             resetGame();
+        }
+
+        function submitHighscore(username, score, isHard) {
+            const data = {
+                username: username,
+                score_easy: isHard ? 0 : score,
+                score_hard: isHard ? score : 0
+            };
+
+            console.log("Submitting high score:", data);
+
+            fetch('/auth/api/highscore', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                console.log("Response status:", response.status);
+                if (response.ok) {
+                    console.log("High score submitted successfully!");
+                } else {
+                    console.error("Failed to submit high score:", response.statusText);
+                }
+            })
+            .catch(error => {
+                console.error("Error submitting high score:", error);
+            });
         }
 
         function resetGame() {

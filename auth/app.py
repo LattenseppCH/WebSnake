@@ -56,6 +56,31 @@ def check():
     return jsonify({'status': 'unauthorized'}), 401
 
 
+@app.route('/scoreboard')
+def scoreboard():
+    token = request.cookies.get('auth')
+    user = User.query.filter_by(auth_token=token).first()
+
+    if not user:
+        return redirect('/login')
+
+    return render_template('scoreboard.html', user=user)
+
+@app.route('/scoreboard_easy')
+def scoreboard_easy():
+    users = User.query.order_by(User.hs_easy.desc()).all()
+    token = request.cookies.get('auth')
+    user = User.query.filter_by(auth_token=token).first()
+    return render_template('scoreboard_easy.html', users=users, username=user.username if user else 'Gast')
+
+@app.route('/scoreboard_hard')
+def scoreboard_hard():
+    users = User.query.order_by(User.hs_hard.desc()).all()
+    token = request.cookies.get('auth')
+    user = User.query.filter_by(auth_token=token).first()
+    return render_template('scoreboard_hard.html', users=users, username=user.username if user else 'Gast')
+
+
 @app.route('/api/resolve-token')
 def resolve_token():
     token = request.args.get('token')
@@ -67,6 +92,24 @@ def resolve_token():
         return jsonify({'error': 'Invalid token'}), 401
 
     return jsonify({'username': user.username})
+
+
+@app.route('/api/highscore', methods=['POST'])
+def submit_highscore():
+    data = request.json
+    username = data.get('username')
+    score_easy = data.get('score_easy')
+    score_hard = data.get('score_hard')
+    user = User.query.filter_by(username=username).first()
+    if user:
+        if score_easy > user.hs_easy:
+            user.hs_easy = score_easy
+        if score_hard > user.hs_hard:
+            user.hs_hard = score_hard
+        db.session.commit()
+        return jsonify({"message": "High scores updated successfully!"}), 200
+    else:
+        return jsonify({"message": "User  not found!"}), 404
 
 
 if __name__ == '__main__':
