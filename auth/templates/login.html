@@ -123,6 +123,18 @@
       transform: scale(0.98);
     }
 
+    .login-error {
+      margin-top: 0.75rem;
+      padding: 0.6rem 1rem;
+      background-color: rgba(255, 77, 77, 0.1);
+      color: #ff4d4d;
+      border: 1px solid rgba(255, 77, 77, 0.3);
+      border-radius: var(--border-radius);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+
     .register-text {
       margin-top: 1.5rem;
       font-size: 0.9rem;
@@ -158,16 +170,24 @@
   <main class="container" role="main" aria-label="Login form for WebSnake">
     <h1>WebSnake</h1>
     <form action="/login" method="POST" novalidate>
-      <label for="username">Benutzername</label>
-      <input id="username" name="username" type="text" autocomplete="username" placeholder="Benutzername" required aria-required="true" />
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" autocomplete="username" placeholder="Username" required aria-required="true" />
 
-      <label for="password">Passwort</label>
-      <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Passwort" required aria-required="true" />
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Password" required aria-required="true" />
 
       <button type="submit" aria-label="Login button">Login</button>
+
+      {% if error %}
+        <div class="login-error">
+          {{ error }}
+        </div>
+      {% endif %}
+
+
     </form>
     <p class="register-text">
-      Noch kein Konto? <a href="/register" aria-label="Registrieren Link">Registrieren</a>
+      No Account? <a href="/register" aria-label="Registrieren Link">Register.</a>
     </p>
   </main>
 </body>

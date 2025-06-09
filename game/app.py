@@ -34,7 +34,7 @@ def index():
             if res.ok:
                 username = res.json().get('username', 'Guest')
         except requests.RequestException:
-            pass  # Auth-Server nicht erreichbar
+            pass
 
     return render_template('index.html', username=username)
 

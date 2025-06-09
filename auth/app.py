@@ -11,6 +11,7 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
@@ -18,7 +19,7 @@ def register():
 
     data = request.form
     if User.query.filter_by(username=data['username']).first():
-        return "User existiert schon", 409
+        return "User already exists.", 409
 
     user = User(username=data['username'])
     user.set_password(data['password'])
@@ -30,13 +31,13 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
-        return render_template('login.html')
+        return render_template('login.html', error=None)
 
-    # POST: Login-Verarbeitung
     data = request.form
     user = User.query.filter_by(username=data['username']).first()
+
     if not user or not user.check_password(data['password']):
-        return "Falsche Daten", 403
+        return render_template('login.html', error="❌ Wrong credentials!")
 
     user.generate_token()
     user.last_logon = datetime.utcnow()

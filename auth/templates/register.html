@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>WebSnake - Registrieren</title>
+  <title>WebSnake - Register</title>
   <style>
     :root {
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
@@ -166,24 +166,21 @@
   <main class="container" role="main" aria-label="Registrierungsformular für WebSnake">
     <h1>WebSnake</h1>
     <form action="/register" method="POST" novalidate>
-      <label for="username">Benutzername</label>
-      <input id="username" name="username" type="text" placeholder="Benutzername" required aria-required="true" />
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" placeholder="Username" required aria-required="true" />
       
-      <label for="password">Passwort</label>
-      <input id="password" name="password" type="password" placeholder="Passwort" required aria-required="true" />
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" placeholder="Password" required aria-required="true" />
       <ul id="pw-criteria" style="list-style: none; padding: 0; margin: 0.5rem 0 0 0; font-size: 0.85rem; color: var(--color-gray-600);">
-        <li id="c-length">✖️ Mind. 5 Zeichen</li>
-        <li id="c-letter">✖️ Buchstaben (A–Z oder a–z)</li>
-        <li id="c-digit">✖️ Zahlen (0–9)</li>
-        <li id="c-special">✖️ Sonderzeichen (! $ & * + _ -)</li>
+        <li id="c-length">✖️ At least 5 Characters</li>
+        <li id="c-letter">✖️ Letters (A–Z oder a–z)</li>
+        <li id="c-digit">✖️ Digits (0–9)</li>
+        <li id="c-special">✖️ Special Characters (! $ & * + _ -)</li>
       </ul>
-
-
-
-      <button type="submit" id="registerBtn" aria-label="Registrieren Button" disabled>Registrieren</button>
+      <button type="submit" id="registerBtn" aria-label="Registrieren Button" disabled>Register</button>
     </form>
     <p class="login-text">
-      Schon registriert? <a href="/login" aria-label="Login Link">Login</a>
+      Already have an account? <a href="/login" aria-label="Login Link">Login.</a>
     </p>
   </main>
 
@@ -205,23 +202,22 @@
       const hasDigit = /\d/.test(pw);
       const hasSpecial = /[!$&*+_\-]/.test(pw);
 
-      // Länge
-      cLength.innerHTML = (hasLength ? '✅' : '✖️') + ' Mind. 5 Zeichen';
+ 
+      cLength.innerHTML = (hasLength ? '✅' : '✖️') + ' At least 5 Characters';
       cLength.style.color = hasLength ? 'var(--color-white)' : 'var(--color-gray-600)';
 
-      // Buchstaben
-      cLetter.innerHTML = (hasLetter ? '✅' : '✖️') + ' Buchstaben (A–Z oder a–z)';
+
+      cLetter.innerHTML = (hasLetter ? '✅' : '✖️') + ' Letters (A–Z oder a–z)';
       cLetter.style.color = hasLetter ? 'var(--color-white)' : 'var(--color-gray-600)';
 
-      // Zahlen
-      cDigit.innerHTML = (hasDigit ? '✅' : '✖️') + ' Zahlen (0–9)';
+
+      cDigit.innerHTML = (hasDigit ? '✅' : '✖️') + ' Digits (0–9)';
       cDigit.style.color = hasDigit ? 'var(--color-white)' : 'var(--color-gray-600)';
 
-      // Sonderzeichen
-      cSpecial.innerHTML = (hasSpecial ? '✅' : '✖️') + ' Sonderzeichen (! $ & * + _ -)';
+
+      cSpecial.innerHTML = (hasSpecial ? '✅' : '✖️') + ' Special Characters (! $ & * + _ -)';
       cSpecial.style.color = hasSpecial ? 'var(--color-white)' : 'var(--color-gray-600)';
 
-      // Nur wenn alle erfüllt → Button aktivieren
       const allValid = hasLength && hasLetter && hasDigit && hasSpecial;
       registerBtn.disabled = !allValid;
     });

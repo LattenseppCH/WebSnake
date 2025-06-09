@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebSnake - by Rahim & Julian</title>
+    <title>WebSnake</title>
     <link rel="icon" href="/game/icons/favicon.ico">
     <style>
         :root {
@@ -150,7 +150,7 @@
     <div class="score-display">Score: <strong id="score">0</strong></div>
 
     <div class="button-container">
-        <button class="button" id="difficultyButton">Einfach</button>
+        <button class="button" id="difficultyButton">Easy</button>
     </div>
     
     <canvas id="gameCanvas" width="400" height="400"></canvas>
@@ -189,7 +189,7 @@
 
         difficultyButton.addEventListener('click', function() {
             isHard = !isHard;
-            difficultyButton.textContent = isHard ? 'Hart' : 'Einfach';
+            difficultyButton.textContent = isHard ? 'Hard' : 'Easy';
             resetGame();
         });
 
@@ -241,7 +241,7 @@
 
         function endGame() {
             clearInterval(gameInterval);
-            alert('Dein Ergebniss war ' + score);
+            alert('Your score was ' + score);
             
             const username = '{{ username }}';
 
