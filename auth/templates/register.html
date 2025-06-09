@@ -122,6 +122,14 @@
     button[type="submit"]:active {
       transform: scale(0.98);
     }
+    button[type="submit"]:disabled {
+      background-color: var(--color-gray-600);
+      color: var(--color-gray-400);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+      opacity: 0.6;
+    }
 
     .login-text {
       margin-top: 1.5rem;
@@ -163,12 +171,61 @@
       
       <label for="password">Passwort</label>
       <input id="password" name="password" type="password" placeholder="Passwort" required aria-required="true" />
-      
-      <button type="submit" aria-label="Registrieren Button">Registrieren</button>
+      <ul id="pw-criteria" style="list-style: none; padding: 0; margin: 0.5rem 0 0 0; font-size: 0.85rem; color: var(--color-gray-600);">
+        <li id="c-length">✖️ Mind. 5 Zeichen</li>
+        <li id="c-letter">✖️ Buchstaben (A–Z oder a–z)</li>
+        <li id="c-digit">✖️ Zahlen (0–9)</li>
+        <li id="c-special">✖️ Sonderzeichen (! $ & * + _ -)</li>
+      </ul>
+
+
+
+      <button type="submit" id="registerBtn" aria-label="Registrieren Button" disabled>Registrieren</button>
     </form>
     <p class="login-text">
       Schon registriert? <a href="/login" aria-label="Login Link">Login</a>
     </p>
   </main>
+
+  <script>
+    const pwInput = document.getElementById('password');
+    const registerBtn = document.getElementById('registerBtn');
+    
+
+    const cLength = document.getElementById('c-length');
+    const cLetter = document.getElementById('c-letter');
+    const cDigit = document.getElementById('c-digit');
+    const cSpecial = document.getElementById('c-special');
+
+    pwInput.addEventListener('input', () => {
+      const pw = pwInput.value;
+
+      const hasLength = pw.length >= 5;
+      const hasLetter = /[a-zA-Z]/.test(pw);
+      const hasDigit = /\d/.test(pw);
+      const hasSpecial = /[!$&*+_\-]/.test(pw);
+
+      // Länge
+      cLength.innerHTML = (hasLength ? '✅' : '✖️') + ' Mind. 5 Zeichen';
+      cLength.style.color = hasLength ? 'var(--color-white)' : 'var(--color-gray-600)';
+
+      // Buchstaben
+      cLetter.innerHTML = (hasLetter ? '✅' : '✖️') + ' Buchstaben (A–Z oder a–z)';
+      cLetter.style.color = hasLetter ? 'var(--color-white)' : 'var(--color-gray-600)';
+
+      // Zahlen
+      cDigit.innerHTML = (hasDigit ? '✅' : '✖️') + ' Zahlen (0–9)';
+      cDigit.style.color = hasDigit ? 'var(--color-white)' : 'var(--color-gray-600)';
+
+      // Sonderzeichen
+      cSpecial.innerHTML = (hasSpecial ? '✅' : '✖️') + ' Sonderzeichen (! $ & * + _ -)';
+      cSpecial.style.color = hasSpecial ? 'var(--color-white)' : 'var(--color-gray-600)';
+
+      // Nur wenn alle erfüllt → Button aktivieren
+      const allValid = hasLength && hasLetter && hasDigit && hasSpecial;
+      registerBtn.disabled = !allValid;
+    });
+  </script>
+
 </body>
 </html>
