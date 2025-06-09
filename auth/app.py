@@ -1,5 +1,5 @@
 from flask import Flask, request, redirect, render_template, make_response, jsonify
-
+from werkzeug.exceptions import HTTPException
 from datetime import datetime
 from models import db, User
 
@@ -114,6 +114,14 @@ def submit_highscore():
     else:
         return jsonify({"message": "User  not found!"}), 404
 
+@app.errorhandler(Exception)
+def handle_all_errors(error):
+    code = getattr(error, "code", 500)
+
+    if code == 404:
+        return render_template("404.html"), 404
+
+    return render_template("error.html"), code
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

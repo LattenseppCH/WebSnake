@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Page not found</title>
+  <style>
+    body {
+      background-color: #1f2937;
+      color: #f9fafb;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.25rem;
+      color: #9ca3af;
+    }
+
+    button {
+      background-color: #2563eb;
+      color: #f9fafb;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 0.9rem 1.5rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.25s ease-in-out, transform 0.25s ease-in-out;
+      user-select: none;
+      box-shadow: 0 6px 12px rgb(37 99 235 / 0.5);
+      margin-top: 2rem;
+    }
+
+    button:hover,
+    button:focus {
+      background-color: #1e40af;
+      transform: scale(1.03);
+      outline: none;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+<body>
+  <h1>404</h1>
+  <p>This page does not exist.</p>
+  <button type="button" onclick="window.location.href='/'" aria-label="BackButton">
+    Back to Main Page
+  </button>
+</body>
+</html>
