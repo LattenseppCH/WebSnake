@@ -86,7 +86,7 @@ WebSnake/
 
 ## 📖 Authors
 
-- [@Rahim Pacolli](https://github.com/LattenseppCH)
+- [@Rahim Pacolli](https://github.com/pacrah)
 - [@Julian Eberle](https://github.com/Julian9496)
 
 
