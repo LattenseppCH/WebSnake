@@ -24,6 +24,7 @@ def register():
     user.set_password(data['password'])
     db.session.add(user)
     db.session.commit()
+    print(f"Registered user: {user.username}")
     return redirect('/login')
 
 

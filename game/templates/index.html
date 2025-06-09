@@ -6,6 +6,19 @@
     <title>WebSnake - by Rahim & Julian</title>
     <link rel="icon" href="/game/icons/favicon.ico">
     <style>
+        :root {
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+                Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            --color-gray-400: #9ca3af;
+            --color-gray-600: #4b5563;
+            --color-gray-900: #111827;
+            --color-bg: #1f2937;
+            --color-white: #f9fafb;
+            --color-primary: #2563eb;
+            --color-primary-hover: #1e40af;
+            --color-red: #ff4d4d; /* Red color for logoff button */
+            --border-radius: 12px;
+        }
 
         body {
             display: flex;
@@ -14,53 +27,107 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #000;
+            background-color: var(--color-bg);
+            font-family: var(--font-sans);
+            color: var(--color-white);
+            position: relative; /* For positioning the user info */
         }
-        canvas {
-            border: 1px solid #ffffff;
+
+        .user-info {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--color-gray-600);
+            color: var(--color-white);
+            border-radius: 20px;
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
         }
-        .scoreboard {
-            color: white;
-            font-size: 24px;
-            margin-bottom: 10px;
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 40px; /* Position below the user info */
+            right: 0;
+            background-color: var(--color-gray-900);
+            border-radius: var(--border-radius);
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+
+        .scoreboard-button {
+            color: var(--color-white);
+            font-size: 18px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+        }
+
+        .score-display {
+            font-size: 24px; /* Increased font size for score display */
+            margin-bottom: 10px; /* Space between score and difficulty button */
+        }
+
         .button-container {
             margin-bottom: 10px;
         }
+
         .button {
-            font-size: 18px;
-            padding: 5px 10px;
+            font-size: 20px; /* Increased font size */
+            padding: 10px 15px; /* Increased padding */
             cursor: pointer;
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border: none;
+            border-radius: var(--border-radius);
+            transition: background-color 0.25s ease-in-out;
         }
-        .input-container {
+
+        .button:hover {
+            background-color: var(--color-primary-hover);
+        }
+
+        .logoff-button {
+            background-color: var(--color-red);
+            color: var(--color-white);
             margin-top: 10px;
+            font-size: 18px; /* Increased font size */
+            padding: 10px 15px; /* Increased padding */
         }
-        .input-container label {
-            color: white;
-            font-size: 18px;
-            margin-right: 10px;
+
+        .logoff-button:hover {
+            background-color: darkred; /* Darker red on hover */
         }
-        .input-container input {
-            font-size: 18px;
-            padding: 5px;
+
+        canvas {
+            border: 1px solid var(--color-white);
+            border-radius: var(--border-radius);
         }
     </style>
 </head>
 
 <body>
-    <div class="scoreboard">👤 Logged in as: <strong>{{ username }}</strong></div>
-    <div class="scoreboard">Score: <span id="score">0</span></div>
-    
+    <div class="user-info" onclick="toggleDropdown(event)">
+        <span>👤 {{ username }}</span>
+        <div class="dropdown" id="userDropdown">
+            <button class="button" onclick="redirectToScoreboard()">SCOREBOARD</button>
+            <button class="button logoff-button" onclick="logoff()">Logoff</button>
+        </div>
+    </div>
+
+    <div class="score-display">Score: <strong id="score">0</strong></div> <!-- Score displayed here -->
 
     <div class="button-container">
         <button class="button" id="difficultyButton">Einfach</button>
     </div>
     
-
     <canvas id="gameCanvas" width="400" height="400"></canvas>
 
     <script>
-
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
         const scoreElement = document.getElementById('score');
@@ -74,7 +141,6 @@
         let speed = 100;
         let isHard = false;
         let gameInterval;
-
 
         document.addEventListener('keydown', function(event) {
             switch(event.key) {
@@ -93,20 +159,15 @@
             }
         });
 
-
-
-
         difficultyButton.addEventListener('click', function() {
             isHard = !isHard;
             difficultyButton.textContent = isHard ? 'Hart' : 'Einfach';
             resetGame();
         });
 
-
         function gameLoop() {
             const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
             snake.unshift(head);
-
 
             if (head.x === apple.x && head.y === apple.y) {
                 apple = { 
@@ -114,7 +175,7 @@
                     y: Math.floor(Math.random() * canvas.height / gridSize) * gridSize
                 };
                 score++;
-                scoreElement.textContent = score;
+                scoreElement.textContent = score; // Update score display
 
                 if (isHard) {
                     speed = speed / 1.1;
@@ -122,13 +183,8 @@
                     gameInterval = setInterval(gameLoop, speed);
                 }
             } else {
-                snake.pop()
+                snake.pop();
             }
-
-
-
-
-
 
             if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height || collision()) {
                 endGame();
@@ -146,8 +202,6 @@
             ctx.fillRect(apple.x, apple.y, gridSize, gridSize);
         }
 
-
-
         function collision() {
             for (let i = 1; i < snake.length; i++) {
                 if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) {
@@ -157,14 +211,11 @@
             return false;
         }
 
-
         function endGame() {
             clearInterval(gameInterval);
             alert('Dein Ergebniss war ' + score);
             resetGame();
         }
-
-
 
         function resetGame() {
             clearInterval(gameInterval);
@@ -172,10 +223,34 @@
             direction = { x: 0, y: 0 };
             apple = { x: 300, y: 300 };
             score = 0;
-            scoreElement.textContent = score;
+            scoreElement.textContent = score; // Reset score display
             speed = 100;
             gameInterval = setInterval(gameLoop, speed);
         }
+
+        function toggleDropdown(event) {
+            event.stopPropagation(); // Prevent click event from bubbling up
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function redirectToScoreboard() {
+            window.location.href = '/scoreboard'; // Redirect to scoreboard
+        }
+
+        function logoff() {
+            alert('Logging off...'); // Placeholder for logoff functionality
+            // Implement logoff functionality here
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('userDropdown');
+            if (dropdown.style.display === 'block') {
+                dropdown.style.display = 'none';
+            }
+        });
+
         resetGame();
     </script>
 </body>

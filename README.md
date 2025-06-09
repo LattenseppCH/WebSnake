@@ -101,7 +101,7 @@ WebSnake/
 - [SQLite3]()
 - [Flask]()
 - [FlaskAuth]()
-- [CSS during Auth (Login, Register, Error..)](https://blackbox.ai)
+- [CSS improvement](https://blackbox.ai)
 - [Dockerfile](https://docs.docker.com/build/concepts/dockerfile/)
 - [Debug Help](https://chatgpt.com)
 - Special thanks to **Gianluca** for tips & debug help
