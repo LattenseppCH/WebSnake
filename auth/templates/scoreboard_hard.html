@@ -106,11 +106,30 @@
       border-bottom: 1px solid var(--color-gray-600);
       display: flex;
       justify-content: space-between;
+      gap: 1rem;
     }
 
     .entry:last-child {
       border-bottom: none;
     }
+
+    .entry span:first-child {
+      min-width: 30px;
+    }
+
+    .entry.gold {
+      background-color: #FFD70022; /* Gold transparent */
+    }
+
+    .entry.silver {
+      background-color: #C0C0C022; /* Silber transparent */
+    }
+
+    .entry.bronze {
+      background-color: #CD7F3222; /* Bronze transparent */
+    }
+
+
   </style>
 </head>
 <body>
@@ -120,17 +139,19 @@
     </div>
     <div class="dropdown" id="userDropdown">
       <button onclick="window.location.href='/game'">Game</button>
-      <button onclick="window.location.href='/auth/logoff'">Logoff</button>
+      <button onclick="window.location.href='/logoff'">Logoff</button>
     </div>
 
     <h1>Hard Leaderboard</h1>
     <div class="scrollbox">
-    {% for user in users %}
-    <div class="entry">
-        <span>{{ user.username }}</span>
-        <span>{{ user.hs_hard }}</span>
-    </div>
-    {% endfor %}
+      {% for user in users %}
+        {% set rank_class = 'gold' if loop.index == 1 else 'silver' if loop.index == 2 else 'bronze' if loop.index == 3 else '' %}
+        <div class="entry {{ rank_class }}">
+          <span>{{ loop.index }}.</span>
+          <span>{{ user.username }}</span>
+          <span>{{ user.hs_easy }}</span>
+        </div>
+      {% endfor %}
     </div>
     <div class="leaderboard-buttons" style="margin-top: 2rem; display: flex; gap: 1rem;">
       <a href="/scoreboard_easy" style="background-color: var(--color-primary); color: var(--color-white); text-decoration: none; padding: 0.75rem 1rem; border-radius: var(--border-radius); font-weight: 600; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='var(--color-primary-hover)'" onmouseout="this.style.backgroundColor='var(--color-primary)'">Scoreboard: Easy</a>

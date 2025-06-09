@@ -27,7 +27,6 @@ def register():
     print(f"Registered user: {user.username}")
     return redirect('/login')
 
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
@@ -47,7 +46,6 @@ def login():
     resp.set_cookie('auth', user.auth_token, httponly=True, max_age=3600)
     return resp
 
-
 @app.route('/check')
 def check():
     token = request.cookies.get('auth')
@@ -55,6 +53,11 @@ def check():
         return jsonify({'status': 'ok'}), 200
     return jsonify({'status': 'unauthorized'}), 401
 
+@app.route('/logoff')
+def logoff():
+    resp = make_response(redirect('/'))
+    resp.delete_cookie('auth', path='/')
+    return resp
 
 @app.route('/scoreboard')
 def scoreboard():
@@ -79,7 +82,6 @@ def scoreboard_hard():
     token = request.cookies.get('auth')
     user = User.query.filter_by(auth_token=token).first()
     return render_template('scoreboard_hard.html', users=users, username=user.username if user else 'Gast')
-
 
 @app.route('/api/resolve-token')
 def resolve_token():

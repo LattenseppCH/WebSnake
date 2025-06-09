@@ -80,6 +80,15 @@
       background-color: var(--color-primary-hover);
     }
 
+
+    .dropdown button:last-child {
+      background-color: var(--color-red);
+    }
+
+    .dropdown button:last-child:hover {
+      background-color: darkred;
+    }
+    
     h1 {
       text-align: center;
       margin-bottom: 2rem;
@@ -126,8 +135,8 @@
       👤 {{ user.username }}
     </div>
     <div class="dropdown" id="userDropdown">
-    <button onmouseover="this.style.backgroundColor='var(--color-primary-hover)'" onmouseout="this.style.backgroundColor='var(--color-primary)'" onclick="window.location.href='/game'">Game</button>
-    <button onmouseover="this.style.backgroundColor='darkred'" onmouseout="this.style.backgroundColor='var(--color-red)'" style="background-color: var(--color-red);" onclick="window.location.href='/auth/logoff'">Logoff</button>
+      <button onclick="window.location.href='/game'">Game</button>
+      <button onclick="window.location.href='/logoff'">Logoff</button>
     </div>
 
 

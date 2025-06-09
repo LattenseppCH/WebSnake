@@ -58,6 +58,33 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
+        .dropdown button {
+            background-color: var(--color-primary);
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            width: 100%;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .dropdown button:hover {
+            background-color: var(--color-primary-hover);
+        }
+
+
+
+        .dropdown button:last-child {
+            background-color: var(--color-red);
+        }
+
+        .dropdown button:last-child:hover {
+            background-color: darkred;
+        }
+
+
         .scoreboard-button {
             color: var(--color-white);
             font-size: 18px;
@@ -115,8 +142,8 @@
     <div class="user-info" onclick="toggleDropdown(event)">
         <span>👤 {{ username }}</span>
         <div class="dropdown" id="userDropdown">
-            <button class="button" onclick="redirectToScoreboard()">Scoreboard</button>
-            <button class="button logoff-button" onclick="logoff()">Logoff</button>
+             <button onclick="window.location.href='/game'">Scoreboard</button>
+            <button onclick="window.location.href='/logoff'">Logoff</button>
         </div>
     </div>
 
