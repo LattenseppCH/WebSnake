@@ -16,7 +16,7 @@
             --color-white: #f9fafb;
             --color-primary: #2563eb;
             --color-primary-hover: #1e40af;
-            --color-red: #ff4d4d; /* Red color for logoff button */
+            --color-red: #ff4d4d;
             --border-radius: 12px;
         }
 
@@ -30,7 +30,7 @@
             background-color: var(--color-bg);
             font-family: var(--font-sans);
             color: var(--color-white);
-            position: relative; /* For positioning the user info */
+            position: relative;
         }
 
         .user-info {
@@ -39,17 +39,18 @@
             right: 20px;
             background-color: var(--color-gray-600);
             color: var(--color-white);
-            border-radius: 20px;
-            padding: 5px 10px;
+            border-radius: 30px;
+            padding: 10px 15px;
             display: flex;
             align-items: center;
             cursor: pointer;
+            font-size: 18px;
         }
 
         .dropdown {
             display: none;
             position: absolute;
-            top: 40px; /* Position below the user info */
+            top: 40px;
             right: 0;
             background-color: var(--color-gray-900);
             border-radius: var(--border-radius);
@@ -68,8 +69,8 @@
         }
 
         .score-display {
-            font-size: 24px; /* Increased font size for score display */
-            margin-bottom: 10px; /* Space between score and difficulty button */
+            font-size: 24px;
+            margin-bottom: 10px;
         }
 
         .button-container {
@@ -77,8 +78,8 @@
         }
 
         .button {
-            font-size: 20px; /* Increased font size */
-            padding: 10px 15px; /* Increased padding */
+            font-size: 20px;
+            padding: 10px 15px;
             cursor: pointer;
             background-color: var(--color-primary);
             color: var(--color-white);
@@ -95,12 +96,12 @@
             background-color: var(--color-red);
             color: var(--color-white);
             margin-top: 10px;
-            font-size: 18px; /* Increased font size */
-            padding: 10px 15px; /* Increased padding */
+            font-size: 18px;
+            padding: 10px 15px;
         }
 
         .logoff-button:hover {
-            background-color: darkred; /* Darker red on hover */
+            background-color: darkred;
         }
 
         canvas {
@@ -114,12 +115,12 @@
     <div class="user-info" onclick="toggleDropdown(event)">
         <span>👤 {{ username }}</span>
         <div class="dropdown" id="userDropdown">
-            <button class="button" onclick="redirectToScoreboard()">SCOREBOARD</button>
+            <button class="button" onclick="redirectToScoreboard()">Scoreboard</button>
             <button class="button logoff-button" onclick="logoff()">Logoff</button>
         </div>
     </div>
 
-    <div class="score-display">Score: <strong id="score">0</strong></div> <!-- Score displayed here -->
+    <div class="score-display">Score: <strong id="score">0</strong></div>
 
     <div class="button-container">
         <button class="button" id="difficultyButton">Einfach</button>
@@ -175,7 +176,7 @@
                     y: Math.floor(Math.random() * canvas.height / gridSize) * gridSize
                 };
                 score++;
-                scoreElement.textContent = score; // Update score display
+                scoreElement.textContent = score;
 
                 if (isHard) {
                     speed = speed / 1.1;
@@ -223,27 +224,25 @@
             direction = { x: 0, y: 0 };
             apple = { x: 300, y: 300 };
             score = 0;
-            scoreElement.textContent = score; // Reset score display
+            scoreElement.textContent = score;
             speed = 100;
             gameInterval = setInterval(gameLoop, speed);
         }
 
         function toggleDropdown(event) {
-            event.stopPropagation(); // Prevent click event from bubbling up
+            event.stopPropagation();
             const dropdown = document.getElementById('userDropdown');
             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         }
 
         function redirectToScoreboard() {
-            window.location.href = '/scoreboard'; // Redirect to scoreboard
+            window.location.href = '/scoreboard';
         }
 
         function logoff() {
-            alert('Logging off...'); // Placeholder for logoff functionality
-            // Implement logoff functionality here
+            window.location.href = '/logoff';
         }
 
-        // Close dropdown when clicking outside
         document.addEventListener('click', function(event) {
             const dropdown = document.getElementById('userDropdown');
             if (dropdown.style.display === 'block') {
