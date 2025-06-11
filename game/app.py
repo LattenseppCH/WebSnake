@@ -35,7 +35,7 @@ def index():
             else:
                 return redirect('/')
         except requests.RequestException:
-            return redirect('/lol')
+            return redirect('/404')
     else:
         return redirect('/')
 
