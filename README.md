@@ -82,25 +82,3 @@ WebSnake/
 | Authentication    | Flask (Python), SQLite (token-based login)     |
 | Game Server       | Flask (Python), HTML5, CSS3, JavaScript (Canvas) |
 | Database          | SQLite (file-based, embedded in container)     |
-
-
-## 📖 Authors
-
-- [@Rahim Pacolli](https://github.com/pacrah)
-- [@Julian Eberle](https://github.com/Julian9496)
-
-
-## 🔎 Sources
-
-- [Emoji](https://emojipedia.org/)
-- [Logo](https://chatgpt.com)
-- [Docker Compose](https://docs.docker.com/compose/)
-- [README](https://readme.so)
-- [NGINX Config](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/)
-- [Base Snake Game](https://snake.lattensepp.ch)
-- [SQLite3](https://docs.python.org/3/library/sqlite3.html)
-- [Flask](https://python-adv-web-apps.readthedocs.io/en/latest/flask.html)
-- [CSS improvement](https://blackbox.ai)
-- [Dockerfile](https://docs.docker.com/build/concepts/dockerfile/)
-- [Debug Help](https://chatgpt.com)
-- Special thanks to **Gianluca** for tips & debug help
